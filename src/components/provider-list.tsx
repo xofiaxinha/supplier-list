@@ -75,6 +75,9 @@ export function SupplierList(){
     function goToPreviousPage(){
         setCurrentPage(page - 1)
     }
+    function handleCancel(){
+        setShowForm("Nenhum");
+    }
     function handleSubmit(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault();
         const form = event.currentTarget;
@@ -134,9 +137,11 @@ export function SupplierList(){
     return(
         <>
             <Header>
-                <TextButton text="Adicionar Fornecedor" onClick={() => {setShowForm("Adicionar Fornecedor")}}/>
             </Header>
-            {showForm === "Adicionar Fornecedor" ? <SupplierForm subm={handleSubmit}>
+            <div className="button-container">
+                <TextButton text="Adicionar Fornecedor" id="add-supplier" onClick={() => {setShowForm("Adicionar Fornecedor")}}/>
+            </div>
+            {showForm === "Adicionar Fornecedor" ? <SupplierForm add={handleSubmit} cancel={handleCancel}>
             </SupplierForm> : ""}
             <Table>
                 <TableRow>

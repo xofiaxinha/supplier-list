@@ -7,7 +7,7 @@ body{
 .table-container{
     width: 90%;
     justify-content: center;
-    margin: 0 auto;
+    margin: 28px auto;
     border-radius: 20px;
     background-color: var(--white);
 }
@@ -54,12 +54,108 @@ body{
     border: none;
     padding: 10px;
 }
+.table-cell .text-button{
+    font-size: 12px;
+}
 .table-cell.footer:nth-child(2){
     justify-content: end;
 }
-.supplier-form-add{
+/*Header styling*/
+header{
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-green);
+    background-image: linear-gradient(0deg, rgba(73,107,54,1) 0%, rgba(107,142,78,1) 51%);
+}
+header h1{
+    color: var(--white);
+    font-size: 32px;
+}
+/*Button styling*/
+.button-container{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: fit-content;
+}
+.text-button{
+    background-color: var(--medium-green);
+    color: var(--white);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.button-container .text-button{
+    margin: 10px;
+}
+.text-button:hover{
+    background-color: var(--dark-green);
+}
+.text-button:active{
+    color: var(--main-green);
+}
+.supplier-form-before{
     position: absolute;
-    width: 50%;
     z-index: 1;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.supplier-form-add{
+    position: relative;
+    width: 60%;
+    height: 70%;
+    z-index: 2;
     background-color: white;
+    border-radius: 20px;
+    margin: 80px auto;
+    padding: 10px;
+    box-shadow: 0px 0px 64px 0px var(--dark-green);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.supplier-form-add h2{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--medium-green);
+}
+.supplier-form-add form{
+    width: 80%;
+}
+.supplier-form-add input{
+    width: 100%;
+    height: 32px;
+    margin: 8px 0;
+    padding: 4px;
+    border: 1px solid var(--gray-2);
+    border-radius: 4px;
+    display: block;
+}
+.supplier-form-add label{
+    font-size: 16px;
+    margin: 8px;
+    color: var(--dark-green);
+}
+.supplier-form-add .button-container{
+    margin-top: 20px;
+}
+.supplier-form-add .text-button{
+    font-size: 16px;
+}
+.supplier-form-add .text-button:nth-child(2){
+    background: none;
+    color: var(--medium-green);
+}
+.supplier-form-add .text-button:nth-child(2):hover{
+    background: none;
+    color: var(--dark-green);
 }

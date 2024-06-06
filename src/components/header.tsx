@@ -1,15 +1,10 @@
-import { ComponentPropsWithoutRef } from "react";
-
-interface HeaderProps extends ComponentPropsWithoutRef<'header'>{}
-
-export function Header(props: HeaderProps){
+export function Header(){
     return(
         <header>
             <div className="header-content">
                 <div className="header-logo">
                 </div>
-                <h2>Gerenciador de Fornecedores</h2>
-                {props.children}
+                <h1>Gerenciador de Fornecedores</h1>
             </div>
         </header>
     )

@@ -1,8 +1,9 @@
 :root{
     --white: #fbfff4;
-    --gray-1: #e4e7dd;
-    --gray-2: #403D39;
+    --gray-1: #d5d8ce;
+    --gray-2: #88897e;
     --main-green: #6B8E4E;
+	--medium-green: #496b36;
     --dark-green: #1B2727;
 }
 /* http://meyerweb.com/eric/tools/css/reset/ 

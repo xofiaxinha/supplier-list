@@ -17,7 +17,7 @@ export function IconButton(props: IconButtonProps){
 }
 export function TextButton(props: TextButtonProps){
     return(
-        <button {...props}>
+        <button {...props} className="text-button">
             {props.text}
         </button>
     );
