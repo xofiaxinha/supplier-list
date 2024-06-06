@@ -166,15 +166,17 @@ export function SupplierList(){
                                 }}/>
                             </TableCell>
                             {selectedSupplier === supplier ? <DropDown id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address}>
-                                <TextButton text="Editar" onClick={() => setShowForm("Editar Fornecedor")}/>
-                                <TextButton text="Deletar" onClick={() => {
-                                    const c = confirm("Deseja realmente deletar o fornecedor?");
-                                        if(c){
-                                            handleDelete(supplier.id);
-                                        }
-                                    setShowDropdown(false);
-                                    setSelectedSupplier(null);
-                                    }}/>
+                                <div className="button-container">
+                                    <TextButton text="Editar" onClick={() => setShowForm("Editar Fornecedor")}/>
+                                    <TextButton text="Deletar" onClick={() => {
+                                        const c = confirm("Deseja realmente deletar o fornecedor?");
+                                            if(c){
+                                                handleDelete(supplier.id);
+                                            }
+                                        setShowDropdown(false);
+                                        setSelectedSupplier(null);
+                                        }}/>
+                                </div>
                             </DropDown> : ""}
                             {showForm === "Editar Fornecedor" && selectedSupplier === supplier ? <EditForm edt={handleEdit} id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address} name={supplier.name} cnpj={supplier.cnpj}></EditForm> : ""}
                         </TableRow>

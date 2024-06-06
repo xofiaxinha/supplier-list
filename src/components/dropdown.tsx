@@ -53,11 +53,11 @@ export function EditForm(props: EditFormProps){
 
 export function DropDown(props: DropDownProps){
     return(
-        <div>
-            <p>Email: {props.mail}</p>
-            <p>Telefone: {props.phone}</p>
-            <p>Endereço: {props.address}</p>
-            <p>ID: {props.id}</p>
+        <div className="dropdown">
+            <p><span>Email: </span>{props.mail}</p>
+            <p><span>Telefone: </span>{props.phone}</p>
+            <p><span>Endereço: </span>{props.address}</p>
+            <p><span>ID: </span>{props.id}</p>
             {props.children}
         </div>
     );
