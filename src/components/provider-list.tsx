@@ -2,8 +2,9 @@ import {useEffect, useState} from 'react'
 import {Table, TableCell, TableHeader, TableRow} from './table'
 import suppliers from '../example/suppliers.json'
 import { TextButton } from './buttons'
-import { DropDown, EditForm } from './dropdown'
-import { SupplierForm } from './supplier-form'
+import { DropDown } from './dropdown'
+import { SupplierFormAdd, SupplierFormEdit} from './supplier-form'
+import { Header } from './header'
 
 interface Supplier {
     id: string
@@ -74,6 +75,9 @@ export function SupplierList(){
     function goToPreviousPage(){
         setCurrentPage(page - 1)
     }
+    function handleCancel(){
+        setShowForm("Nenhum");
+    }
     function handleSubmit(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault();
         const form = event.currentTarget;
@@ -132,12 +136,13 @@ export function SupplierList(){
     }
     return(
         <>
-            <div>
-                <h2>Fornecedores</h2>
-                <TextButton text="Adicionar Fornecedor" onClick={() => {setShowForm("Adicionar Fornecedor")}}/>
+            <Header>
+            </Header>
+            <div className="button-container">
+                <TextButton text="Adicionar Fornecedor" id="add-supplier" onClick={() => {setShowForm("Adicionar Fornecedor")}}/>
             </div>
-            {showForm === "Adicionar Fornecedor" ? <SupplierForm subm={handleSubmit}>
-            </SupplierForm> : ""}
+            {showForm === "Adicionar Fornecedor" ? <SupplierFormAdd add={handleSubmit} cancel={handleCancel}>
+            </SupplierFormAdd> : ""}
             <Table>
                 <TableRow>
                     <TableHeader>Nome</TableHeader>
@@ -155,27 +160,32 @@ export function SupplierList(){
                                     setSelectedSupplier(null);
                                 }
                                 else{
+                                    setShowForm("Nenhum");
                                     setShowDropdown(true);
                                     handleSelect(supplier);
                                     }
                                 }}/>
                             </TableCell>
                             {selectedSupplier === supplier ? <DropDown id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address}>
-                                <TextButton text="Editar" onClick={() => setShowForm("Editar Fornecedor")}/>
-                                <TextButton text="Deletar" onClick={() => {
-                                    const c = confirm("Deseja realmente deletar o fornecedor?");
-                                        if(c){
-                                            handleDelete(supplier.id);
-                                        }
-                                    setShowDropdown(false);
-                                    setSelectedSupplier(null);
-                                    }}/>
+                                <div className="button-container">
+                                    <TextButton text="Editar" onClick={() => setShowForm("Editar Fornecedor")}/>
+                                    <TextButton text="Deletar" onClick={() => {
+                                        const c = confirm("Deseja realmente deletar o fornecedor?");
+                                            if(c){
+                                                handleDelete(supplier.id);
+                                            }
+                                        setShowDropdown(false);
+                                        setSelectedSupplier(null);
+                                        }}/>
+                                </div>
                             </DropDown> : ""}
-                            {showForm === "Editar Fornecedor" && selectedSupplier === supplier ? <EditForm edt={handleEdit} id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address} name={supplier.name} cnpj={supplier.cnpj}></EditForm> : ""}
+                            {showForm === "Editar Fornecedor" && selectedSupplier === supplier ? <SupplierFormEdit cancel={handleCancel} edt={handleEdit} id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address} name={supplier.name} cnpj={supplier.cnpj}></SupplierFormEdit> : ""}
                         </TableRow>
                 ))}
                 <TableRow>
-                    <TableCell className='footer'>Total de fornecedores: {suppliersList.length} </TableCell>
+                    <TableCell className='footer'>Total na página: {
+                            page*10 > total ? total - (page-1)*10 : 10
+                        } </TableCell>
                     <TableCell className='footer'>Página {page} de {totalPaginas}</TableCell>
                     <TableCell className='footer'>
                         <button onClick={goToPreviousPage} disabled={page==1}>A</button>

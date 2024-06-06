@@ -1,18 +1,30 @@
+@import url(reset.css);
+
+body{
+    background-color: var(--gray-1);
+}
+/*table styling*/
 .table-container{
     width: 90%;
     justify-content: center;
-    margin: 0 auto;
+    margin: 28px auto;
     border-radius: 20px;
+    background-color: var(--white);
 }
 .table-row{
     display: grid;
     grid-template-columns: 30% 40% 30%;
-    height: fit-content;
+    height: 56px;
     width: 100%;
+    margin: 20px 0;
 }
 .table-cell{
+    padding: 12px 8px;
     display: flex;
     align-items: center;
+}
+.table-cell:nth-child(1){
+    border-bottom-left-radius: 50px;
 }
 .table-cell:nth-child(2){
     border-right: 1px solid black;
@@ -25,10 +37,12 @@
     justify-content: center;
     padding: 10px;
     font-size: 24px;
-    }
+}
 .table-row:has(.table-header){
-    background-color: bisque;
+    background-color: var(--main-green);
     border-radius: 20px 20px 0 0;
+    color: var(--white);
+    box-shadow: 0px 5px 20px 0px rgba(64,61,57,0.2);
 }
 .table-cell p{
     margin-left: 10px;
@@ -44,13 +58,165 @@
     border: none;
     padding: 10px;
 }
+.table-cell .text-button{
+    font-size: 12px;
+}
 .table-cell.footer:nth-child(2){
     justify-content: end;
 }
-
-.supplier-form-add{
-    position: absolute;
-    width: 50%;
+/*Header styling*/
+header{
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-green);
+    background-image: linear-gradient(0deg, rgba(73,107,54,1) 0%, rgba(107,142,78,1) 51%);
+}
+header h1{
+    color: var(--white);
+    font-size: 32px;
+}
+/*Button styling*/
+.button-container{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: fit-content;
+}
+.text-button{
+    background-color: var(--medium-green);
+    color: var(--white);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.button-container .text-button{
+    margin: 10px;
+}
+.text-button:hover{
+    background-color: var(--dark-green);
+}
+.text-button:active{
+    color: var(--main-green);
+}
+/*Add form styling*/
+.supplier-form-before{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.supplier-form{
+    position: fixed;
+    left: 20%;
+    width: 60%;
+    height: 70%;
     z-index: 1;
     background-color: white;
+    border-radius: 20px;
+    margin: 80px auto;
+    padding: 10px;
+    box-shadow: 0px 0px 64px 0px var(--dark-green);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.supplier-form h2{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--medium-green);
+}
+.supplier-form form{
+    width: 80%;
+}
+.supplier-form input{
+    width: 100%;
+    height: 32px;
+    margin: 8px 0;
+    padding: 4px;
+    border: 1px solid var(--gray-2);
+    border-radius: 4px;
+    display: block;
+}
+.supplier-form label{
+    font-size: 16px;
+    margin: 8px;
+    color: var(--dark-green);
+}
+.supplier-form .button-container{
+    margin-top: 20px;
+}
+.supplier-form .text-button{
+    font-size: 16px;
+}
+.supplier-form .text-button:nth-child(2){
+    background: none;
+    color: var(--medium-green);
+}
+.supplier-form .text-button:nth-child(2):hover{
+    background: none;
+    color: var(--dark-green);
+}
+/*Dropdown styling*/
+.dropdown{
+    z-index: 1;
+    background-color: #F2F5EB;
+    padding: 20px;
+    grid-column: span 3;
+    box-shadow: inset 0px 30px 100px -90px rgba(0,0,0,.2);
+}
+.dropdown p{
+    margin: 8px;
+    margin-left: 20px;
+    font-size: 16px;
+    color: var(--medium-green);
+}
+.dropdown span{
+    color: var(--dark-green);
+}
+.dropdown .button-container{
+    justify-content: end;
+}
+.supplier-form.edit{
+    height: 80%;
+}
+.supplier-form input:read-only{
+    background-color: var(--gray-1);
+    color: var(--medium-green);
+}
+label[for=id]{
+    color: var(--medium-green);
+}
+/*Footer styling*/
+.table-row:has(.footer){
+    background-color: var(--main-green);
+    border-radius: 0 0 20px 20px;
+    color: var(--white);
+    height: 56px;
+}
+.footer{
+    margin-left: 10px;
+    gap: 4px;
+}
+.footer button{
+    background-color: var(--medium-green);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+.footer button:disabled{
+    background-color: #21303030;
+    color: var(--dark-green);
 }
