@@ -2,8 +2,8 @@ import {useEffect, useState} from 'react'
 import {Table, TableCell, TableHeader, TableRow} from './table'
 import suppliers from '../example/suppliers.json'
 import { TextButton } from './buttons'
-import { DropDown, EditForm } from './dropdown'
-import { SupplierForm } from './supplier-form'
+import { DropDown } from './dropdown'
+import { SupplierFormAdd, SupplierFormEdit} from './supplier-form'
 import { Header } from './header'
 
 interface Supplier {
@@ -141,8 +141,8 @@ export function SupplierList(){
             <div className="button-container">
                 <TextButton text="Adicionar Fornecedor" id="add-supplier" onClick={() => {setShowForm("Adicionar Fornecedor")}}/>
             </div>
-            {showForm === "Adicionar Fornecedor" ? <SupplierForm add={handleSubmit} cancel={handleCancel}>
-            </SupplierForm> : ""}
+            {showForm === "Adicionar Fornecedor" ? <SupplierFormAdd add={handleSubmit} cancel={handleCancel}>
+            </SupplierFormAdd> : ""}
             <Table>
                 <TableRow>
                     <TableHeader>Nome</TableHeader>
@@ -160,6 +160,7 @@ export function SupplierList(){
                                     setSelectedSupplier(null);
                                 }
                                 else{
+                                    setShowForm("Nenhum");
                                     setShowDropdown(true);
                                     handleSelect(supplier);
                                     }
@@ -178,7 +179,7 @@ export function SupplierList(){
                                         }}/>
                                 </div>
                             </DropDown> : ""}
-                            {showForm === "Editar Fornecedor" && selectedSupplier === supplier ? <EditForm edt={handleEdit} id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address} name={supplier.name} cnpj={supplier.cnpj}></EditForm> : ""}
+                            {showForm === "Editar Fornecedor" && selectedSupplier === supplier ? <SupplierFormEdit cancel={handleCancel} edt={handleEdit} id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address} name={supplier.name} cnpj={supplier.cnpj}></SupplierFormEdit> : ""}
                         </TableRow>
                 ))}
                 <TableRow>
