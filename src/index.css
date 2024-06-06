@@ -1,8 +1,15 @@
+@import url(reset.css);
+
+body{
+    background-color: var(--gray-1);
+}
+/*table styling*/
 .table-container{
     width: 90%;
     justify-content: center;
     margin: 0 auto;
     border-radius: 20px;
+    background-color: var(--white);
 }
 .table-row{
     display: grid;
@@ -11,6 +18,7 @@
     width: 100%;
 }
 .table-cell{
+    padding: 12px 8px;
     display: flex;
     align-items: center;
 }
@@ -25,10 +33,12 @@
     justify-content: center;
     padding: 10px;
     font-size: 24px;
-    }
+}
 .table-row:has(.table-header){
-    background-color: bisque;
+    background-color: var(--main-green);
     border-radius: 20px 20px 0 0;
+    color: var(--white);
+    box-shadow: 0px 5px 20px 0px rgba(64,61,57,0.2);
 }
 .table-cell p{
     margin-left: 10px;
@@ -47,7 +57,6 @@
 .table-cell.footer:nth-child(2){
     justify-content: end;
 }
-
 .supplier-form-add{
     position: absolute;
     width: 50%;
