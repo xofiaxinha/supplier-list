@@ -183,7 +183,9 @@ export function SupplierList(){
                         </TableRow>
                 ))}
                 <TableRow>
-                    <TableCell className='footer'>Total de fornecedores: {suppliersList.length} </TableCell>
+                    <TableCell className='footer'>Total na página: {
+                            page*10 > total ? total - (page-1)*10 : 10
+                        } </TableCell>
                     <TableCell className='footer'>Página {page} de {totalPaginas}</TableCell>
                     <TableCell className='footer'>
                         <button onClick={goToPreviousPage} disabled={page==1}>A</button>
