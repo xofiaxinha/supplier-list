@@ -4,6 +4,7 @@ import suppliers from '../example/suppliers.json'
 import { TextButton } from './buttons'
 import { DropDown, EditForm } from './dropdown'
 import { SupplierForm } from './supplier-form'
+import { Header } from './header'
 
 interface Supplier {
     id: string
@@ -132,10 +133,9 @@ export function SupplierList(){
     }
     return(
         <>
-            <div>
-                <h2>Fornecedores</h2>
+            <Header>
                 <TextButton text="Adicionar Fornecedor" onClick={() => {setShowForm("Adicionar Fornecedor")}}/>
-            </div>
+            </Header>
             {showForm === "Adicionar Fornecedor" ? <SupplierForm subm={handleSubmit}>
             </SupplierForm> : ""}
             <Table>
