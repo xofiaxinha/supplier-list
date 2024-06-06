@@ -1,0 +1,29 @@
+.table-container{
+    width: 90%;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.table{
+    width: 100%;
+}
+.table-header{
+    background-color: bisque;
+}
+.table-row{
+    background-color: gray;
+    width: 100%;
+}
+.see-more{
+    padding: 5px;
+    text-align: center;
+}
+.supplier-form-add{
+    position: absolute;
+    width: 50%;
+    z-index: 1;
+    background-color: white;
+}
+.div-table-row{
+    width: 100%;
+}
