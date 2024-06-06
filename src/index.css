@@ -2,12 +2,7 @@
     width: 90%;
     justify-content: center;
     margin: 0 auto;
-}
-.table{
-    width: 90%;
-    margin: 0 auto;
-    background-color: white;
-    display: flex;
+    border-radius: 20px;
 }
 .table-row{
     display: grid;
@@ -17,16 +12,23 @@
 }
 .table-cell{
     display: flex;
-    border: 1px solid black;
     align-items: center;
 }
+.table-cell:nth-child(2){
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
 .table-header{
-    background-color: bisque;
     font-weight: bold;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 10px;
     font-size: 24px;
+    }
+.table-row:has(.table-header){
+    background-color: bisque;
+    border-radius: 20px 20px 0 0;
 }
 .table-cell p{
     margin-left: 10px;
