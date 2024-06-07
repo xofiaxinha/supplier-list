@@ -237,8 +237,15 @@ export function SupplierList(){
                             <TableCell className='see-more'>
                                 <TextButton text="Ver mais" onClick={() => {
                                 if(showDropDown){
-                                    setShowDropdown(false);
-                                    setSelectedSupplier(null);
+                                    if(selectedSupplier === supplier){
+                                        setShowDropdown(false);
+                                        setSelectedSupplier(null);
+                                    }
+                                    else{
+                                        setShowForm("Nenhum");
+                                        setShowDropdown(true);
+                                        handleSelect(supplier);
+                                    }
                                 }
                                 else{
                                     setShowForm("Nenhum");
