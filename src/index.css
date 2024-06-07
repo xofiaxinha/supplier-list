@@ -7,9 +7,10 @@ body{
 .table-container{
     width: 90%;
     justify-content: center;
-    margin: 28px auto;
+    margin: 0 auto;
     border-radius: 20px;
     background-color: var(--white);
+    box-shadow: 0px 0px 20px 0px rgba(64,61,57,0.2);
 }
 .table-row{
     display: grid;
@@ -76,6 +77,10 @@ header{
 header h1{
     color: var(--white);
     font-size: 32px;
+}
+#add-supplier{
+    margin: 28px;
+    margin-left: 5%;
 }
 /*Button styling*/
 .button-container{
@@ -219,4 +224,21 @@ label[for=id]{
 .footer button:disabled{
     background-color: #21303030;
     color: var(--dark-green);
+}
+@media (min-width: 768px) {
+    .text-button{
+        font-size: 18px;
+    }
+    .table-cell{
+        font-size: 18px;
+    }
+    .table-cell .text-button{
+        font-size: 14px;
+    }
+    header{
+        height: 120px;
+    }
+    header h1{
+        font-size: 44px;
+    }
 }
