@@ -75,6 +75,51 @@ export function SupplierList(){
     function goToPreviousPage(){
         setCurrentPage(page - 1)
     }
+    function validateCNPJ(cnpj: string){
+        if(cnpj.length !== 18){
+            return false;
+            }
+        if(cnpj[2] !== '.' || cnpj[6] !== '.' || cnpj[10] !== '/' || cnpj[15] !== '-'){
+            return false;
+            }
+        const chars = '0123456789';
+        for(let i = 0; i < 18; i++){
+            if(i === 2 || i === 6 || i === 10 || i === 15){
+                continue;
+            }
+            if(!chars.includes(cnpj[i])){
+                return false;
+            }
+        }
+        return true;
+    }
+    function validatePhone(phone: string){
+        if(phone.length !== 10 && phone.length !== 11){
+            return false;
+        }
+        const chars = '0123456789';
+        for(let i = 0; i < phone.length; i++){
+            if(!chars.includes(phone[i])){
+                return false;
+                }
+            }
+        return true;
+    }
+    function validateEmail(email: string){
+        const at = email.indexOf('@');
+        const dot = email.indexOf('.');
+        if(at === -1 || dot === -1){
+            return false;
+        }
+        return true;
+    }
+    function validateForm(name: string, cnpj: string, address: string, phone: string, email: string){
+        if(name === "" || cnpj === "" || address === "" || phone === "" || email === ""){
+            return false;
+        }
+        return true;
+    }
+
     function handleCancel(){
         setShowForm("Nenhum");
     }
@@ -87,6 +132,22 @@ export function SupplierList(){
         const address = formData.get('address') as string;
         const phone = formData.get('phone') as string;
         const email = formData.get('email') as string;
+        if(!validateForm(name, cnpj, address, phone, email)){
+            alert("Preencha todos os campos");
+            return;
+        }
+        if(!validateCNPJ(cnpj)){
+            alert("CNPJ inválido");
+            return;
+        }
+        if(!validatePhone(phone)){
+            alert("Telefone inválido");
+            return;
+        }
+        if(!validateEmail(email)){
+            alert("Email inválido");
+            return;
+        }
         const newSup: Supplier = {
             id: generateID(),
             name: name,
@@ -110,6 +171,22 @@ export function SupplierList(){
         const address = formData.get('address') as string;
         const phone = formData.get('phone') as string;
         const email = formData.get('email') as string;
+        if(!validateForm(name, cnpj, address, phone, email)){
+            alert("Preencha todos os campos");
+            return;
+        }
+        if(!validateCNPJ(cnpj)){
+            alert("CNPJ inválido");
+            return;
+        }
+        if(!validatePhone(phone)){
+            alert("Telefone inválido");
+            return;
+        }
+        if(!validateEmail(email)){
+            alert("Email inválido");
+            return;
+        }
         suppliersList.forEach((supplier) => {
             if(supplier.id === id){
                 supplier.name = name;
