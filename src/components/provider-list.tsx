@@ -38,6 +38,50 @@ function generateID(): string{
     }
     return id;
 }
+function validateCNPJ(cnpj: string){
+    if(cnpj.length !== 18){
+        return false;
+        }
+    if(cnpj[2] !== '.' || cnpj[6] !== '.' || cnpj[10] !== '/' || cnpj[15] !== '-'){
+        return false;
+        }
+    const chars = '0123456789';
+    for(let i = 0; i < 18; i++){
+        if(i === 2 || i === 6 || i === 10 || i === 15){
+            continue;
+        }
+        if(!chars.includes(cnpj[i])){
+            return false;
+        }
+    }
+    return true;
+}
+function validatePhone(phone: string){
+    if(phone.length !== 10 && phone.length !== 11){
+        return false;
+    }
+    const chars = '0123456789';
+    for(let i = 0; i < phone.length; i++){
+        if(!chars.includes(phone[i])){
+            return false;
+            }
+        }
+    return true;
+}
+function validateEmail(email: string){
+    const at = email.indexOf('@');
+    const dot = email.indexOf('.');
+    if(at === -1 || dot === -1){
+        return false;
+    }
+    return true;
+}
+function validateForm(name: string, cnpj: string, address: string, phone: string, email: string){
+    if(name === "" || cnpj === "" || address === "" || phone === "" || email === ""){
+        return false;
+    }
+    return true;
+}
 
 export function SupplierList(){
     const [suppliersList, setSuppliersList] = useState<Supplier[]>([]);
@@ -58,7 +102,10 @@ export function SupplierList(){
     const [page, setPage] = useState(() => {
         const url = new URL(window.location.toString())
         if(url.searchParams.has('page')){
-            return Number(url.searchParams.get('page'))
+            const thisPage = Number(url.searchParams.get('page'))
+            if(thisPage >= 1 && thisPage <= totalPaginas){
+                return thisPage;
+            }
         }
         return 1
     });
@@ -75,51 +122,6 @@ export function SupplierList(){
     function goToPreviousPage(){
         setCurrentPage(page - 1)
     }
-    function validateCNPJ(cnpj: string){
-        if(cnpj.length !== 18){
-            return false;
-            }
-        if(cnpj[2] !== '.' || cnpj[6] !== '.' || cnpj[10] !== '/' || cnpj[15] !== '-'){
-            return false;
-            }
-        const chars = '0123456789';
-        for(let i = 0; i < 18; i++){
-            if(i === 2 || i === 6 || i === 10 || i === 15){
-                continue;
-            }
-            if(!chars.includes(cnpj[i])){
-                return false;
-            }
-        }
-        return true;
-    }
-    function validatePhone(phone: string){
-        if(phone.length !== 10 && phone.length !== 11){
-            return false;
-        }
-        const chars = '0123456789';
-        for(let i = 0; i < phone.length; i++){
-            if(!chars.includes(phone[i])){
-                return false;
-                }
-            }
-        return true;
-    }
-    function validateEmail(email: string){
-        const at = email.indexOf('@');
-        const dot = email.indexOf('.');
-        if(at === -1 || dot === -1){
-            return false;
-        }
-        return true;
-    }
-    function validateForm(name: string, cnpj: string, address: string, phone: string, email: string){
-        if(name === "" || cnpj === "" || address === "" || phone === "" || email === ""){
-            return false;
-        }
-        return true;
-    }
-
     function handleCancel(){
         setShowForm("Nenhum");
     }
@@ -158,6 +160,8 @@ export function SupplierList(){
         }
         suppliersList.push(newSup);
         setSuppliersList(suppliersList);
+        setTotal(suppliersList.length);
+        totalPaginas = Math.ceil(total / 10);
         setShowForm("Nenhum");
     }
     function handleEdit(event: React.FormEvent<HTMLFormElement>){
@@ -196,7 +200,6 @@ export function SupplierList(){
                 supplier.address = address;
             }
         })
-        setSuppliersList(suppliersList);
         setShowForm("Nenhum");
     }
     function handleSelect(supplier: Supplier){
@@ -206,10 +209,11 @@ export function SupplierList(){
         suppliersList.forEach((supplier, index) => {
             if(supplier.id === id){
                 suppliersList.splice(index, 1);
-            }
-        })
-        setSuppliersList(suppliersList);
-        console.log(suppliersList);
+                }
+            })
+        if(total > suppliersList.length){
+            setCurrentPage(totalPaginas-1);
+        }
     }
     return(
         <>
