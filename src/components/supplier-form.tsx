@@ -72,8 +72,10 @@ export function SupplierFormEdit(props: EditFormProps){
                         <input type="text" id="phone" name="phone" value={formstate.phone} onChange={handleChange}/>
                         <label htmlFor="email">Email</label>
                         <input type="text" id="email" name="email" value={formstate.email} onChange={handleChange}/>
-                        <TextButton text="Salvar" type="submit"/>
-                        <TextButton text="Cancelar" onClick={props.cancel}/>
+                        <div className="button-container">
+                            <TextButton text="Salvar" type="submit"/>
+                            <TextButton text="Cancelar" onClick={props.cancel}/>
+                        </div>
                 </form>
             </div> 
         </div>
