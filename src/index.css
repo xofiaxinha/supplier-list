@@ -38,6 +38,7 @@ body{
     justify-content: center;
     padding: 10px;
     font-size: 24px;
+    user-select: none;
 }
 .table-row:has(.table-header){
     background-color: var(--main-green);
@@ -73,6 +74,7 @@ header{
     justify-content: center;
     background-color: var(--main-green);
     background-image: linear-gradient(0deg, rgba(73,107,54,1) 0%, rgba(107,142,78,1) 51%);
+    user-select: none;
 }
 header h1{
     color: var(--white);
@@ -238,6 +240,7 @@ label[for=id]{
 .footer{
     margin-left: 10px;
     gap: 4px;
+    user-select: none;
 }
 .footer button{
     background-color: var(--medium-green);
