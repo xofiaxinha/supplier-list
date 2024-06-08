@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react'
 import {Table, TableCell, TableHeader, TableRow} from './table'
 import suppliers from '../example/suppliers.json'
-import { TextButton } from './buttons'
+import { IconButton, TextButton } from './buttons'
 import { DropDown } from './dropdown'
 import { SupplierFormAdd, SupplierFormEdit} from './supplier-form'
 import { Header } from './header'
+import { images } from '../assets/images'
 
 interface Supplier {
     id: string
@@ -38,6 +39,50 @@ function generateID(): string{
     }
     return id;
 }
+function validateCNPJ(cnpj: string){
+    if(cnpj.length !== 18){
+        return false;
+        }
+    if(cnpj[2] !== '.' || cnpj[6] !== '.' || cnpj[10] !== '/' || cnpj[15] !== '-'){
+        return false;
+        }
+    const chars = '0123456789';
+    for(let i = 0; i < 18; i++){
+        if(i === 2 || i === 6 || i === 10 || i === 15){
+            continue;
+        }
+        if(!chars.includes(cnpj[i])){
+            return false;
+        }
+    }
+    return true;
+}
+function validatePhone(phone: string){
+    if(phone.length !== 10 && phone.length !== 11){
+        return false;
+    }
+    const chars = '0123456789';
+    for(let i = 0; i < phone.length; i++){
+        if(!chars.includes(phone[i])){
+            return false;
+            }
+        }
+    return true;
+}
+function validateEmail(email: string){
+    const at = email.indexOf('@');
+    const dot = email.indexOf('.');
+    if(at === -1 || dot === -1){
+        return false;
+    }
+    return true;
+}
+function validateForm(name: string, cnpj: string, address: string, phone: string, email: string){
+    if(name === "" || cnpj === "" || address === "" || phone === "" || email === ""){
+        return false;
+    }
+    return true;
+}
 
 export function SupplierList(){
     const [suppliersList, setSuppliersList] = useState<Supplier[]>([]);
@@ -58,7 +103,10 @@ export function SupplierList(){
     const [page, setPage] = useState(() => {
         const url = new URL(window.location.toString())
         if(url.searchParams.has('page')){
-            return Number(url.searchParams.get('page'))
+            const thisPage = Number(url.searchParams.get('page'))
+            if(thisPage >= 1 && thisPage <= totalPaginas){
+                return thisPage;
+            }
         }
         return 1
     });
@@ -75,51 +123,6 @@ export function SupplierList(){
     function goToPreviousPage(){
         setCurrentPage(page - 1)
     }
-    function validateCNPJ(cnpj: string){
-        if(cnpj.length !== 18){
-            return false;
-            }
-        if(cnpj[2] !== '.' || cnpj[6] !== '.' || cnpj[10] !== '/' || cnpj[15] !== '-'){
-            return false;
-            }
-        const chars = '0123456789';
-        for(let i = 0; i < 18; i++){
-            if(i === 2 || i === 6 || i === 10 || i === 15){
-                continue;
-            }
-            if(!chars.includes(cnpj[i])){
-                return false;
-            }
-        }
-        return true;
-    }
-    function validatePhone(phone: string){
-        if(phone.length !== 10 && phone.length !== 11){
-            return false;
-        }
-        const chars = '0123456789';
-        for(let i = 0; i < phone.length; i++){
-            if(!chars.includes(phone[i])){
-                return false;
-                }
-            }
-        return true;
-    }
-    function validateEmail(email: string){
-        const at = email.indexOf('@');
-        const dot = email.indexOf('.');
-        if(at === -1 || dot === -1){
-            return false;
-        }
-        return true;
-    }
-    function validateForm(name: string, cnpj: string, address: string, phone: string, email: string){
-        if(name === "" || cnpj === "" || address === "" || phone === "" || email === ""){
-            return false;
-        }
-        return true;
-    }
-
     function handleCancel(){
         setShowForm("Nenhum");
     }
@@ -158,6 +161,8 @@ export function SupplierList(){
         }
         suppliersList.push(newSup);
         setSuppliersList(suppliersList);
+        setTotal(suppliersList.length);
+        totalPaginas = Math.ceil(total / 10);
         setShowForm("Nenhum");
     }
     function handleEdit(event: React.FormEvent<HTMLFormElement>){
@@ -196,7 +201,6 @@ export function SupplierList(){
                 supplier.address = address;
             }
         })
-        setSuppliersList(suppliersList);
         setShowForm("Nenhum");
     }
     function handleSelect(supplier: Supplier){
@@ -206,10 +210,11 @@ export function SupplierList(){
         suppliersList.forEach((supplier, index) => {
             if(supplier.id === id){
                 suppliersList.splice(index, 1);
-            }
-        })
-        setSuppliersList(suppliersList);
-        console.log(suppliersList);
+                }
+            })
+        if(total > suppliersList.length){
+            setCurrentPage(totalPaginas-1);
+        }
     }
     return(
         <>
@@ -231,8 +236,8 @@ export function SupplierList(){
                             <TableCell><p>{supplier.name}</p></TableCell>
                             <TableCell><p>{supplier.cnpj}</p></TableCell>
                             <TableCell className='see-more'>
-                                <TextButton text="Ver mais" onClick={() => {
-                                if(showDropDown){
+                                <IconButton path={images.plus} onClick={() => {
+                                if(showDropDown && selectedSupplier === supplier){
                                     setShowDropdown(false);
                                     setSelectedSupplier(null);
                                 }
@@ -240,8 +245,8 @@ export function SupplierList(){
                                     setShowForm("Nenhum");
                                     setShowDropdown(true);
                                     handleSelect(supplier);
-                                    }
-                                }}/>
+                                }
+                                }} alt='see-more'/>
                             </TableCell>
                             {selectedSupplier === supplier ? <DropDown id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address}>
                                 <div className="button-container">
@@ -265,8 +270,8 @@ export function SupplierList(){
                         } </TableCell>
                     <TableCell className='footer'>Página {page} de {totalPaginas}</TableCell>
                     <TableCell className='footer'>
-                        <button onClick={goToPreviousPage} disabled={page==1}>A</button>
-                        <button onClick={goToNextPage} disabled={page==totalPaginas}>P</button>
+                        <IconButton path={images.prev} onClick={goToPreviousPage} disabled={page==1} alt='previous-pg'/>
+                        <IconButton path={images.next} onClick={goToNextPage} disabled={page==totalPaginas} alt='next-pg'/>
                     </TableCell>
                 </TableRow>
             </Table>

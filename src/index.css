@@ -108,10 +108,37 @@ header h1{
 .text-button:active{
     color: var(--main-green);
 }
+.icon-button{
+    padding: 2px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--medium-green);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: cover;
+}
+.icon-button:enabled{
+    width: 36px;
+    height: 36px;
+}
+.icon-button:hover{
+    background-color: var(--dark-green);
+}
+.icon-button img{
+    width: 100%;
+    height: 100%;
+}
+.icon-button:enabled img{
+    filter: invert(1);
+}
+.see-more .icon-button{
+    width: 36px;
+}
 /*Add form styling*/
 .supplier-form-before{
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     left: 0;
     width: 100%;
@@ -123,7 +150,7 @@ header h1{
     left: 20%;
     width: 60%;
     height: 70%;
-    z-index: 1;
+    z-index: 3;
     background-color: white;
     border-radius: 20px;
     margin: 80px auto;
