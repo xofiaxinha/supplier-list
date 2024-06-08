@@ -236,22 +236,15 @@ export function SupplierList(){
                             <TableCell><p>{supplier.cnpj}</p></TableCell>
                             <TableCell className='see-more'>
                                 <TextButton text="Ver mais" onClick={() => {
-                                if(showDropDown){
-                                    if(selectedSupplier === supplier){
-                                        setShowDropdown(false);
-                                        setSelectedSupplier(null);
-                                    }
-                                    else{
-                                        setShowForm("Nenhum");
-                                        setShowDropdown(true);
-                                        handleSelect(supplier);
-                                    }
+                                if(showDropDown && selectedSupplier === supplier){
+                                    setShowDropdown(false);
+                                    setSelectedSupplier(null);
                                 }
                                 else{
                                     setShowForm("Nenhum");
                                     setShowDropdown(true);
                                     handleSelect(supplier);
-                                    }
+                                }
                                 }}/>
                             </TableCell>
                             {selectedSupplier === supplier ? <DropDown id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address}>
