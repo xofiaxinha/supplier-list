@@ -162,7 +162,6 @@ export function SupplierList(){
         suppliersList.push(newSup);
         setSuppliersList(suppliersList);
         setTotal(suppliersList.length);
-        totalPaginas = Math.ceil(total / 10);
         setShowForm("Nenhum");
     }
     function handleEdit(event: React.FormEvent<HTMLFormElement>){
@@ -212,9 +211,11 @@ export function SupplierList(){
                 suppliersList.splice(index, 1);
                 }
             })
-        if(total > suppliersList.length){
-            setCurrentPage(totalPaginas-1);
+        if(page == totalPaginas && (total - (page-1)*10) === 1){
+            setCurrentPage(page - 1);
         }
+        setTotal(suppliersList.length);
+        setSuppliersList(suppliersList);
     }
     return(
         <>
