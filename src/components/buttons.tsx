@@ -10,7 +10,7 @@ interface TextButtonProps extends ComponentProps<'button'>{
 
 export function IconButton(props: IconButtonProps){
     return(
-        <button {...props}>
+        <button className='icon-button' {...props}>
             <img src={props.path} alt={props.alt} />
         </button>
     );

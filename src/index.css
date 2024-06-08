@@ -108,6 +108,33 @@ header h1{
 .text-button:active{
     color: var(--main-green);
 }
+.icon-button{
+    padding: 2px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--medium-green);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: cover;
+}
+.icon-button:enabled{
+    width: 36px;
+    height: 36px;
+}
+.icon-button:hover{
+    background-color: var(--dark-green);
+}
+.icon-button img{
+    width: 100%;
+    height: 100%;
+}
+.icon-button:enabled img{
+    filter: invert(1);
+}
+.see-more .icon-button{
+    width: 36px;
+}
 /*Add form styling*/
 .supplier-form-before{
     position: fixed;

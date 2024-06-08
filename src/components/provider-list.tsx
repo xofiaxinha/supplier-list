@@ -1,10 +1,11 @@
 import {useEffect, useState} from 'react'
 import {Table, TableCell, TableHeader, TableRow} from './table'
 import suppliers from '../example/suppliers.json'
-import { TextButton } from './buttons'
+import { IconButton, TextButton } from './buttons'
 import { DropDown } from './dropdown'
 import { SupplierFormAdd, SupplierFormEdit} from './supplier-form'
 import { Header } from './header'
+import { images } from '../assets/images'
 
 interface Supplier {
     id: string
@@ -235,7 +236,7 @@ export function SupplierList(){
                             <TableCell><p>{supplier.name}</p></TableCell>
                             <TableCell><p>{supplier.cnpj}</p></TableCell>
                             <TableCell className='see-more'>
-                                <TextButton text="Ver mais" onClick={() => {
+                                <IconButton path={images.plus} onClick={() => {
                                 if(showDropDown && selectedSupplier === supplier){
                                     setShowDropdown(false);
                                     setSelectedSupplier(null);
@@ -245,7 +246,7 @@ export function SupplierList(){
                                     setShowDropdown(true);
                                     handleSelect(supplier);
                                 }
-                                }}/>
+                                }} alt='see-more'/>
                             </TableCell>
                             {selectedSupplier === supplier ? <DropDown id={supplier.id} mail={supplier.email} phone={supplier.phone} address={supplier.address}>
                                 <div className="button-container">
@@ -269,8 +270,8 @@ export function SupplierList(){
                         } </TableCell>
                     <TableCell className='footer'>Página {page} de {totalPaginas}</TableCell>
                     <TableCell className='footer'>
-                        <button onClick={goToPreviousPage} disabled={page==1}>A</button>
-                        <button onClick={goToNextPage} disabled={page==totalPaginas}>P</button>
+                        <IconButton path={images.prev} onClick={goToPreviousPage} disabled={page==1} alt='previous-pg'/>
+                        <IconButton path={images.next} onClick={goToNextPage} disabled={page==totalPaginas} alt='next-pg'/>
                     </TableCell>
                 </TableRow>
             </Table>
