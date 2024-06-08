@@ -75,6 +75,7 @@ header{
     background-color: var(--main-green);
     background-image: linear-gradient(0deg, rgba(73,107,54,1) 0%, rgba(107,142,78,1) 51%);
     user-select: none;
+    text-align: center;
 }
 header h1{
     color: var(--white);
@@ -254,6 +255,27 @@ label[for=id]{
 .footer button:disabled{
     background-color: #21303030;
     color: var(--dark-green);
+}
+@media (max-width: 500px) {
+    .text-button{
+        font-size: 12px;
+    }
+    .table-cell{
+        font-size: 14px;
+    }
+    .table-cell .text-button{
+        font-size: 18px;
+    }
+    header{
+        height: 120px;
+    }
+    .table-header{
+        font-size: 20px;
+    }
+    header h1{
+        font-size: 36px;
+        text-wrap: wrap;
+    }
 }
 @media (min-width: 768px) {
     .text-button{
