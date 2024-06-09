@@ -2,6 +2,12 @@
 
 body{
     background-color: var(--gray-1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main{
+    min-height: 100vh;
 }
 /*table styling*/
 .table-container{
@@ -255,6 +261,35 @@ label[for=id]{
 .footer button:disabled{
     background-color: #21303030;
     color: var(--dark-green);
+}
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    height: 64px;
+    padding: 8px;
+    background-color: var(--main-green);
+    color: var(--white);
+    font-size: 16px;
+    user-select: none;
+    gap: 4px;
+    font-size: 14px;
+}
+footer a, a:visited{
+    color: var(--dark-green);
+}
+footer a:hover{
+    color: var(--medium-green);
+}
+.social-media{
+    display: flex;
+    gap: 8px;
+}
+.social-media .icon-button{
+    width: 28px;
+    height: 28px;
 }
 @media (max-width: 500px) {
     .text-button{
