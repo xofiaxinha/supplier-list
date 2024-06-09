@@ -140,15 +140,15 @@ export function SupplierList(){
             return;
         }
         if(!validateCNPJ(cnpj)){
-            alert("CNPJ inválido");
+            alert("CNPJ inválido. Insira no formato xx.xxx.xxx/xxxx-xx");
             return;
         }
         if(!validatePhone(phone)){
-            alert("Telefone inválido");
+            alert("Telefone inválido. Insira apenas números, com DDD.");
             return;
         }
         if(!validateEmail(email)){
-            alert("Email inválido");
+            alert("Email inválido.");
             return;
         }
         const newSup: Supplier = {
